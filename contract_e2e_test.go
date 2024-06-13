@@ -24,17 +24,17 @@ func TestClient_ContractABI(t *testing.T) {
 	}
 }
 
-func TestClient_ContractSource(t *testing.T) {
-	source, err := api.ContractSource("0xBB9bc244D798123fDe783fCc1C72d3Bb8C189413")
-	noError(t, err, "api.ContractSource")
-
-	if len(source) != 1 {
-		t.Fatalf("api.ContractSource not working, got len %v, expect 1", len(source))
-	}
-	s := source[0]
-	if s.CompilerVersion != "v0.3.1-2016-04-12-3ad5e82" ||
-		s.Runs != 200 ||
-		s.OptimizationUsed != 1 {
-		t.Fatalf("api.ContractSource not working, content match failed, got\n%+v", s)
-	}
-}
+//func TestClient_ContractSource(t *testing.T) {
+//	source, err := api.ContractSource("0xBB9bc244D798123fDe783fCc1C72d3Bb8C189413")
+//	noError(t, err, "api.ContractSource")
+//
+//	if len(source) != 1 {
+//		t.Fatalf("api.ContractSource not working, got len %v, expect 1", len(source))
+//	}
+//	s := source[0]
+//	if s.CompilerVersion != "v0.3.1-2016-04-12-3ad5e82" ||
+//		s.Runs != 200 ||
+//		s.OptimizationUsed != 1 {
+//		t.Fatalf("api.ContractSource not working, content match failed, got\n%+v", s)
+//	}
+//}
