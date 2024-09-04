@@ -9,13 +9,13 @@ package etherscan
 
 // EtherTotalSupply gets total supply of ether
 func (c *Client) EtherTotalSupply() (totalSupply *BigInt, err error) {
-	err = c.call("stats", "ethsupply", nil, &totalSupply)
+	err = c.Call("stats", "ethsupply", nil, &totalSupply)
 	return
 }
 
 // EtherLatestPrice gets the latest ether price, in BTC and USD
 func (c *Client) EtherLatestPrice() (price LatestPrice, err error) {
-	err = c.call("stats", "ethprice", nil, &price)
+	err = c.Call("stats", "ethprice", nil, &price)
 	return
 }
 
@@ -25,6 +25,6 @@ func (c *Client) TokenTotalSupply(contractAddress string) (totalSupply *BigInt, 
 		"contractaddress": contractAddress,
 	}
 
-	err = c.call("stats", "tokensupply", param, &totalSupply)
+	err = c.Call("stats", "tokensupply", param, &totalSupply)
 	return
 }

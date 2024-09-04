@@ -14,18 +14,18 @@ func (c *Client) AccountBalance(address string) (balance *BigInt, err error) {
 		"address": address,
 	}
 	balance = new(BigInt)
-	err = c.call("account", "balance", param, balance)
+	err = c.Call("account", "balance", param, balance)
 	return
 }
 
-// MultiAccountBalance gets ether balance for multiple addresses in a single call
+// MultiAccountBalance gets ether balance for multiple addresses in a single Call
 func (c *Client) MultiAccountBalance(addresses ...string) (balances []AccountBalance, err error) {
 	param := M{
 		"tag":     "latest",
 		"address": addresses,
 	}
 	balances = make([]AccountBalance, 0, len(addresses))
-	err = c.call("account", "balancemulti", param, &balances)
+	err = c.Call("account", "balancemulti", param, &balances)
 	return
 }
 
@@ -48,7 +48,7 @@ func (c *Client) NormalTxByAddress(address string, startBlock *int, endBlock *in
 		param["sort"] = "asc"
 	}
 
-	err = c.call("account", "txlist", param, &txs)
+	err = c.Call("account", "txlist", param, &txs)
 	return
 }
 
@@ -71,7 +71,7 @@ func (c *Client) InternalTxByAddress(address string, startBlock *int, endBlock *
 		param["sort"] = "asc"
 	}
 
-	err = c.call("account", "txlistinternal", param, &txs)
+	err = c.Call("account", "txlistinternal", param, &txs)
 	return
 }
 
@@ -103,7 +103,7 @@ func (c *Client) ERC20Transfers(contractAddress, address *string, startBlock *in
 		param["sort"] = "asc"
 	}
 
-	err = c.call("account", "tokentx", param, &txs)
+	err = c.Call("account", "tokentx", param, &txs)
 	return
 }
 
@@ -127,7 +127,7 @@ func (c *Client) ERC721Transfers(contractAddress, address *string, startBlock *i
 		param["sort"] = "asc"
 	}
 
-	err = c.call("account", "tokennfttx", param, &txs)
+	err = c.Call("account", "tokennfttx", param, &txs)
 	return
 }
 
@@ -151,7 +151,7 @@ func (c *Client) ERC1155Transfers(contractAddress, address *string, startBlock *
 		param["sort"] = "asc"
 	}
 
-	err = c.call("account", "token1155tx", param, &txs)
+	err = c.Call("account", "token1155tx", param, &txs)
 	return
 }
 
@@ -164,7 +164,7 @@ func (c *Client) BlocksMinedByAddress(address string, page int, offset int) (min
 		"offset":    offset,
 	}
 
-	err = c.call("account", "getminedblocks", param, &mined)
+	err = c.Call("account", "getminedblocks", param, &mined)
 	return
 }
 
@@ -177,7 +177,7 @@ func (c *Client) UnclesMinedByAddress(address string, page int, offset int) (min
 		"offset":    offset,
 	}
 
-	err = c.call("account", "getminedblocks", param, &mined)
+	err = c.Call("account", "getminedblocks", param, &mined)
 	return
 }
 
@@ -189,6 +189,6 @@ func (c *Client) TokenBalance(contractAddress, address string) (balance *BigInt,
 		"tag":             "latest",
 	}
 
-	err = c.call("account", "tokenbalance", param, &balance)
+	err = c.Call("account", "tokenbalance", param, &balance)
 	return
 }

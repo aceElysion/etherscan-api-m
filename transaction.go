@@ -20,7 +20,7 @@ func (c *Client) ExecutionStatus(txHash string) (status ExecutionStatus, err err
 		"txhash": txHash,
 	}
 
-	err = c.call("transaction", "getstatus", param, &status)
+	err = c.Call("transaction", "getstatus", param, &status)
 	return
 }
 
@@ -40,7 +40,7 @@ func (c *Client) ReceiptStatus(txHash string) (receiptStatus int, err error) {
 		Status string `json:"status"`
 	}{}
 
-	err = c.call("transaction", "gettxreceiptstatus", param, &rawStatus)
+	err = c.Call("transaction", "gettxreceiptstatus", param, &rawStatus)
 	if err != nil {
 		return
 	}

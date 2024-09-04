@@ -18,7 +18,7 @@ func (c *Client) BlockReward(blockNum int) (rewards BlockRewards, err error) {
 		"blockno": blockNum,
 	}
 
-	err = c.call("block", "getblockreward", param, &rewards)
+	err = c.Call("block", "getblockreward", param, &rewards)
 	return
 }
 
@@ -33,7 +33,7 @@ func (c *Client) BlockNumber(timestamp int64, closest string) (blockNumber int, 
 		"closest":   closest,
 	}
 
-	err = c.call("block", "getblocknobytime", param, &blockNumberStr)
+	err = c.Call("block", "getblocknobytime", param, &blockNumberStr)
 
 	if err != nil {
 		return

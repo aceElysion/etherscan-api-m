@@ -49,7 +49,7 @@ func New(network Network, APIKey string) *Client {
 
 // Customization is used in NewCustomized()
 type Customization struct {
-	// Timeout for API call
+	// Timeout for API Call
 	Timeout time.Duration
 	// API key applied from Etherscan
 	Key string
@@ -91,8 +91,8 @@ func NewCustomized(config Customization) *Client {
 	}
 }
 
-// call does almost all the dirty work.
-func (c *Client) call(module, action string, param map[string]interface{}, outcome interface{}) (err error) {
+// Call does almost all the dirty work.
+func (c *Client) Call(module, action string, param map[string]interface{}, outcome interface{}) (err error) {
 	// fire hooks if in need
 	if c.BeforeRequest != nil {
 		err = c.BeforeRequest(module, action, param)

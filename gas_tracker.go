@@ -13,7 +13,7 @@ import "time"
 func (c *Client) GasEstimate(gasPrice int) (confirmationTimeInSec time.Duration, err error) {
 	params := M{"gasPrice": gasPrice}
 	var confTime string
-	err = c.call("gastracker", "gasestimate", params, &confTime)
+	err = c.Call("gastracker", "gasestimate", params, &confTime)
 	if err != nil {
 		return
 	}
@@ -22,6 +22,6 @@ func (c *Client) GasEstimate(gasPrice int) (confirmationTimeInSec time.Duration,
 
 // GasOracle gets suggested gas prices (in Gwei)
 func (c *Client) GasOracle() (gasPrices GasPrices, err error) {
-	err = c.call("gastracker", "gasoracle", M{}, &gasPrices)
+	err = c.Call("gastracker", "gasoracle", M{}, &gasPrices)
 	return
 }
