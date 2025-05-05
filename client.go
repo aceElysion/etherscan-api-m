@@ -214,6 +214,6 @@ func (c *Client) craftURL(module, action string, param map[string]interface{}) (
 		q[k] = extractValue(v)
 	}
 
-	URL = c.baseURL + q.Encode()
+	URL = c.baseURL + "?" + q.Encode()
 	return
 }
