@@ -27,7 +27,7 @@ type Envelope struct {
 // ProxyEnvelope is the carrier of nearly every proxy response
 type ProxyEnvelope struct {
 	// jsonrpc
-	Jsonrpc string `json:"jsonrpc,string"`
+	Jsonrpc string `json:"jsonrpc"`
 	// id
 	Id int `json:"id"`
 	// where response lies
