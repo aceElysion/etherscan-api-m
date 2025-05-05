@@ -24,6 +24,16 @@ type Envelope struct {
 	Result json.RawMessage `json:"result"`
 }
 
+// ProxyEnvelope is the carrier of nearly every proxy response
+type ProxyEnvelope struct {
+	// jsonrpc
+	Jsonrpc int `json:"jsonrpc,string"`
+	// id
+	Id int `json:"id"`
+	// where response lies
+	Result json.RawMessage `json:"result"`
+}
+
 // AccountBalance account and its balance in pair
 type AccountBalance struct {
 	Account string  `json:"account"`

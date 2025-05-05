@@ -166,22 +166,33 @@ func (c *Client) Call(module, action string, param map[string]interface{}, outco
 		return
 	}
 
-	var envelope Envelope
-	err = json.Unmarshal(content.Bytes(), &envelope)
-	if err != nil {
-		err = wrapErr(err, "json unmarshal envelope")
-		return
+	var result json.RawMessage
+	if module == "proxy" {
+		var envelope ProxyEnvelope
+		err = json.Unmarshal(content.Bytes(), &envelope)
+		if err != nil {
+			err = wrapErr(err, "json unmarshal envelope")
+			return
+		}
+		result = envelope.Result
+	} else {
+		var envelope Envelope
+		err = json.Unmarshal(content.Bytes(), &envelope)
+		if err != nil {
+			err = wrapErr(err, "json unmarshal envelope")
+			return
+		}
+		if envelope.Status != 1 {
+			err = fmt.Errorf("etherscan server: %s", envelope.Message)
+			return
+		}
+		result = envelope.Result
 	}
-	if envelope.Status != 1 {
-		err = fmt.Errorf("etherscan server: %s", envelope.Message)
-		return
-	}
-
 	// workaround for missing tokenDecimal for some tokentx calls
 	if action == "tokentx" {
-		err = json.Unmarshal(bytes.Replace(envelope.Result, []byte(`"tokenDecimal":""`), []byte(`"tokenDecimal":"0"`), -1), outcome)
+		err = json.Unmarshal(bytes.Replace(result, []byte(`"tokenDecimal":""`), []byte(`"tokenDecimal":"0"`), -1), outcome)
 	} else {
-		err = json.Unmarshal(envelope.Result, outcome)
+		err = json.Unmarshal(result, outcome)
 	}
 	if err != nil {
 		err = wrapErr(err, "json unmarshal outcome")
