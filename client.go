@@ -15,7 +15,6 @@ import (
 	"net/http"
 	"net/http/httputil"
 	"net/url"
-	"strings"
 	"time"
 )
 
@@ -215,14 +214,6 @@ func (c *Client) craftURL(module, action string, param map[string]interface{}) (
 		q[k] = extractValue(v)
 	}
 
-	if strings.Contains(c.baseURL, "?") {
-		if !strings.HasSuffix(c.baseURL, "?") {
-			URL = c.baseURL + "&" + q.Encode()
-		} else {
-			URL = c.baseURL + q.Encode()
-		}
-	} else {
-		URL = c.baseURL + "?" + q.Encode()
-	}
+	URL = c.baseURL + "?" + q.Encode()
 	return
 }
